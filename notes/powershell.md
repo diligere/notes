@@ -202,3 +202,46 @@ Get-ScheduledTask -TaskName new-sched-task
 
 
 ![image-20200811121558454](powershell.assets/image-20200811121558454.png)
+
+
+
+## scripting
+
+### port listener
+
+```powershell
+$system_ports = Get-NetTCPConnection -State Listen
+$text_port = Get-Content -Path 'C:\Users\Administrator\Desktop\ports.txt'
+foreach($port in $text_port){
+	if($port -in $system_ports.LocalPort){
+		echo $port
+	}
+}
+```
+
+![image-20200811213335114](powershell.assets/image-20200811213335114.png)
+
+Getting all tcp connection that are listen state and comparing it with already given ports to check if a port is open or close
+
+![image-20200811213726793](powershell.assets/image-20200811213726793.png)
+
+
+
+### find file containing password
+
+```powershell
+ls -recurse | select-string -pattern password
+```
+
+
+
+![image-20200811215039995](powershell.assets/image-20200811215039995.png)
+
+
+
+### portscanner
+
+```powershell
+130..140 | % {echo ((new-object system.net.sockets.tcpclient).connect("127.0.0.1,$_")) "Port $_ is open"} 2>$null
+```
+
