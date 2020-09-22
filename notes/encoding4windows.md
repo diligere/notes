@@ -2,7 +2,7 @@
 
 
 
-![image-20200918202431988](/home/manish/.config/Typora/typora-user-images/image-20200918202431988.png)
+![image-20200918202431988](encoding4windows.assets/image-20200918202431988.png)
 
 
 
