@@ -650,8 +650,6 @@ proxychains xfreerdp /v:10.200.138.35 /u:watamet /p:Nothingtoworry! /dynamic-res
 
 
 
-## PC-FILESRV01
-
 
 
 ## powerview
@@ -662,3 +660,63 @@ https://github.com/PowerShellMafia/PowerSploit/tree/master/Recon#powerview
 https://github.com/HarmJ0y/CheatSheets/blob/master/PowerView.pdf
 ```
 
+
+### TUNNELLING USING SSH
+1. login to the ssh shell and start dynamic port forwarding on port 1080
+
+![[Pasted image 20220326161748.png]]
+
+2. Configure Proxychains to send socks4 proxy through port 1080. The location of the configuration file is "/etc/proxychains4.conf"
+
+![[Pasted image 20220326161905.png]]
+
+3. Now we can use proxychains to connect to internal network computers.
+![[Pasted image 20220326162344.png]]
+
+## PC-FILESERV01
+1. We can use rdp on PC-FILESRV01 as we have vaild set of credentials with proxychains
+
+```xfreerdp /v:10.200.110.35 /u:watamet /p:Nothingtoworry! /dynamic-resolution```
+
+### Privilege Escalaton
+1. We can use metasploit module to check for any local privilege escalation
+2. We can deploy a metasploit agent first and get a meterpreter shell.
+3. Then we can check for local exploits using exploit suggester
+
+![[Pasted image 20220326164217.png]]
+
+
+4. The target is vulnerable to exploit/windows/local/cve_2021_40449
+![[Pasted image 20220326164353.png]]
+
+5. We have administrator access on PC-FILESRV01
+
+
+## Domain Admin
+1. We can get Domain Admin by using NTLMRELAYX which is a exploit that works in enterprise environment
+2. For NTLMRELAYX to work we need to have message signing either disabled or enabled and not required, Message siging is for making sure that authentication comes from the system is saying it is coming from.
+
+### Cobalt strike
+1. We will use cobalt strike to do local port forwarding so that all the request that comes  port 8445 to smb on .35 can be forwarded to the kali machine.
+2. And we will redirect all the traffic that comes on 445 to 8445 on .35 using a tool called tcpdivertconn
+3. ONce the above is setup run proxychains with ntlmrelayx to relay the attach on the domain controller
+4. ```proxychains4 impacket-ntlmrelayx -t 10.200.110.30 -smb2support -c 'whoami'```
+
+
+![[Pasted image 20220326165641.png]]
+forward local port 8445 to kali machine 445
+
+
+![[Pasted image 20220326170046.png]]
+divert traffic from local 445 to local 8445 on .35 machine
+
+
+![[Pasted image 20220326170520.png]]
+We are getting privileged access on Domain Controller
+
+
+![[Pasted image 20220326171210.png]]
+shell on Domain Controller
+
+![[Pasted image 20220326171349.png]]
+Credentials on the domain hololive

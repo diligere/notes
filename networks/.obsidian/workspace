@@ -1,0 +1,99 @@
+{
+  "main": {
+    "id": "eb7b846a25087022",
+    "type": "split",
+    "children": [
+      {
+        "id": "64e8f5056c004b03",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "HOLO.md",
+            "mode": "source",
+            "source": false
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "4035b26c9e294b02",
+    "type": "split",
+    "children": [
+      {
+        "id": "855661a3b8ec2426",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "633ceb9ebbd9ee24",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "338df82471d0d383",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "8145bf598a9b5ea9",
+    "type": "split",
+    "children": [
+      {
+        "id": "5dad65665c3bce8a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "05cbd79bb4a22091",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "HOLO.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "64e8f5056c004b03",
+  "lastOpenFiles": [
+    "HOLO.md",
+    "HOLO.assets/Pasted image 20220326171349.png",
+    "HOLO.assets/Pasted image 20220326171210.png",
+    "HOLO.assets/Pasted image 20220326161905.png",
+    "Pasted image 20220326162059.png",
+    "HOLO.assets/Pasted image 20220326161748.png"
+  ]
+}
